@@ -16,13 +16,76 @@
        
 
     </head>
-   
-    
+   <style>
+       .joke-body
+       {
+           text-align: center;
+       }
+       .setup
+       {
+           font-weight: bold;
+           font-size: 18px;
+           margin-top: 10px;
+       }
+       .punchline
+       {
+           font-weight: bold;
+           font-size: 18px;
+           margin-top: 10px;
+           color: #a83625;
+       }
+       button
+       {
+           margin-top: 150px;
+       }
+       .author
+       {
+           margin-top: 300px;
+       }
+   </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelector("button").addEventListener("click", showJoke)
+            
+            function showJoke(){
+                
+            const jokeBody = document.querySelector(".joke-body");
+            
+            while (jokeBody.firstChild) {
+                jokeBody.firstChild.remove()
+            }
+            fetch("https://official-joke-api.appspot.com/jokes/random")
+            .then(res => res.json())
+            .then(joke => {
+                const setup = document.createElement("p")
+                setup.className = "setup"
+                const punchline = document.createElement("p")
+                punchline.className = "punchline"
+                setup.textContent = `Setup: ${joke.setup}`
+                punchline.textContent = `Punchline: ${joke.punchline}`
+                jokeBody.appendChild(setup)
+                jokeBody.appendChild(punchline)
+            })
+            
+                
+            }
+        })
+    </script>
     
     
     <body>
     
-    <center><h3>Welcome to my Page</h3></center>
+    <center><h3>Random Jokes</h3></center>
+    
+    <center><button class="btn btn-success">Show the Joke</button></center>
+    <div class="joke-body">
+        
+    </div>
+    
+    <div class="author">
+        <center><strong>Munasib Khan - 2021</strong></center>
+    </div>
+    
     
     
     </body>
